@@ -13,9 +13,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
-import django_heroku
-import dj_database_url
-fron decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +29,7 @@ SATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'xo)u49t+2)a&%6q%tclepo-oz$tzu*zcw#+!b6!lt#-^lxvp&+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -62,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'social_django.middleware.SocialAuthExceptionMiddleware',
     
@@ -154,8 +150,6 @@ STATICFILES_DIRS = [
 ]
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedMainfestStaticFilesStorage'
-
 # Added manually  (media management)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -170,6 +164,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SOCIAL_AUTH_FACEBOOK_KEY = "255131422854578"
 SOCIAL_AUTH_FACEBOOK_KEY_SECRET = "b2ff098cd0575a205aae9a4d79deff33"
-
-
-django_heroku.settings(colals())
