@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}User cart{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+<body onload="myFunction()">
+</body>
+{% endblock css %}
+
+{% block cart %}
+<div class="container"><br>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="container" >
+                <a href="{% url 'mycart' %}" class="btn btn-info mb-3">Update Cart</a>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Sl No.</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cp in cart.cartproduct_set.all %}
+                        <tr>
+                        <th scope="row">{{forloop.counter}} .</th>
+                        <td>{{cp.product}}</td>
+                        <td>{{cp.rate}}</td>
+                        <td>{{cp.quantity}}</td>
+                        <td>{{cp.subtotal}}</td>
+                        
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <th colspan="4"></th>
+                            
+                            <th>RS. {{cart.total}}</th>
+                        </tr>
+                            {% comment %} <th><a href="{% url 'empty' %}" >Click to CART Empty</a></th> {% endcomment %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group ">
+                {{form.order_by|as_crispy_field}}
+                {{form.mobile|as_crispy_field}}
+                {{form.email|as_crispy_field}}
+                {{form.pin_code|as_crispy_field}}
+                {{form.shiping_address|as_crispy_field}}
+                </div>
+                <div class="dropdown">
+                {{form.payment_method|as_crispy_field}}
+                </div>
+                <button type="submit" class="btn btn-success">Proceed</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock cart %}

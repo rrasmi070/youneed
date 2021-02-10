@@ -1,0 +1,28 @@
+{% extends 'seller_base.html' %}
+
+{% block title %}Youneed || Product Entry{% endblock %}
+
+
+
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <div class="border rounded border-primary px-3 mt-5">
+        <h3><i><u >Instructions :-</u></i></h3>
+        <p> >> To upload more image </p>
+      </div>
+    </div>
+    <div class="col-8">
+      
+      <div class="form mt-3">
+        <form action="#" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form }}
+          <button class="btn btn-success mt-4">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

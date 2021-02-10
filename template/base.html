@@ -1,0 +1,225 @@
+{% load static %}
+{% static "carousel" as baseUrl %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock title %} </title>
+  </head>
+  {% block css %}
+  {% endblock css %}
+  
+  <style>
+    .rounded-circle{
+        height:30px;
+        width:30px;
+    }
+
+    .slid{
+        height:300px;
+        width:1000px;
+    }
+  
+  </style>
+  
+    <div class="">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/"><b><i>Youneed.com</i></b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+            aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="">ABOUT
+                    <span class="sr-only">(current)</span>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                <a class="nav-link" href="/seller">seller</a>
+                </li> {% endcomment %}
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Filter
+                </a>
+                <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
+                    {% for c in cate %}
+                    
+                    <a class="dropdown-item" href="/?category={{c.id }}">{{c.category_name}}</a>
+                    {% comment %} </form> {% endcomment %}
+                    {% endfor %}
+                    
+                </div>
+                </li>
+            </ul>
+            <form action="{% url 'search' %}" method="GET" class="form-inline my-2 my-lg-0">
+                <span><input class="form-control"  name="search" placeholder="Search Items....." aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button></span>
+            </form>
+            <a href="{% url 'mycart' %}">
+            <button type="button" class="btn btn-secondary mx-2" id="popcart" data-container="body" data-placement="bottom" data-html="true" data-content="Vivamus
+                    sagittis lacus vel augue laoreet rutrum faucibus.">
+                    <svg class="bi bi-cart-check ml-1" width="1.5em" height="1.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M11.354 5.646a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                </svg>
+            (<span id="cart">0</span>)
+            </button>
+            </a>
+            {% if user.is_authenticated %}
+            {% else %}
+            <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#exampleModal">Login</button>
+
+          <!-- Registration Modal Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SignupexampleModal">Signup</button>
+              {% endif %} 
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light">
+                    <i class="fas fa-envelope"></i>
+                    </a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item avatar dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0" alt="avatar image">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                        aria-labelledby="navbarDropdownMenuLink-55">
+                        <a href="{% url 'profile'%}" class="dropdown-item alert-success"><strong>My Profile</strong></a>
+                        <a class="dropdown-item alert-success" href="{% url 'lgout' %}"><strong>{{request.user.first_name}} </strong>Logout!!</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+            </div>
+            <!-- Modal Form -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel"><u><i><b>Login.</b></i></u></h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"> 
+              <form method="POST" action="{% url 'login' %}">
+              {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" placeholder="Email" name="user" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password"  placeholder="password" name="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <div class="row">
+                  <button type="submit" class="btn btn-success mx-4">Submit</button>
+                  <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary">LOHIN WITH FACEBOOK</a href="">
+                  <button type="button" class="btn btn-success mx-4" data-toggle="modal" data-target="#SignupexampleModal">Signup</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Registration Modal -->
+      <div class="modal fade" id="SignupexampleModal" tabindex="-1" role="dialog" aria-labelledby="SignupexampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="SignupexampleModalLabel"><u><b><i>Seller Registration</i></b></u></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+                <form method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div class="form">
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">First Name:</label>
+                  <input type="text" placeholder="First name" name="f_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group col-md-6">
+                  <label for="exampleInputEmail1">Last Name:</label>
+                  <input type="text" placeholder="Last name" name="l_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                </div>
+
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" placeholder="Enter Email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password"  placeholder="password" name="psw" class="form-control" id="exampleInputPassword1">
+                  <label for="exampleInputPassword1">Repeat Password</label>
+                  <input type="password"  placeholder="Repeat password" name="psw_repeat" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">I agree with your T&C</label>
+                </div>
+                <div class="row">
+                  <button type="submit" class="btn btn-primary mx-4">Register</button><br>
+                  <a href="" data-toggle="modal" data-target="#exampleModal"><u><i>If are you a Existing customer Click here to Login</i></u></a>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+        </nav>
+    </div>
+  <body>
+    {% comment %} <h1>Hello, world! {{a}}</h1> {% endcomment %}
+    <!--Navbar -->
+    {% comment %} {% block cart %}
+    
+    {% endblock cart %} {% endcomment %}
+
+    {% block card %}
+    {% endblock card %}
+{% block cart %}
+{% endblock cart %}
+
+{% block details %}
+{% endblock details %}
+
+{% block js %}
+{% endblock js %}
+    
+      <!--card-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{% extends 'seller_base.html' %}
+{% block title %}Youneed|| seller Registration{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 mt-4">
+            <h5 class="text-center"><i><strong><u> Instructions :- </u></strong></i></h5>
+        </div>
+        <div class="col-6 mt-4">
+            <form method="{% url 'sell_signup' %}" action="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form" >
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">First Name<i>(As per Document)</i>:</label>
+                            <input type="text" placeholder="First name" name="f_name" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail1">Last Name<i>(As per Document)</i>:</label>
+                            <input type="text" placeholder="Last name" name="l_name" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" placeholder="Enter Email" name="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <label for="exampleInputEmail1">Phone :</label>
+                    <input type="tel" placeholder="Phone number" name="Phone" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <label for="exampleInputEmail1">Date of Birth :</label>
+                    <input type="date" placeholder="Date of birth" name="dob" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    
+                    <label for="exampleInputEmail1">Document no.</label>
+                    <input type="text" placeholder="Document no." name="Doc_no" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <label for="exampleInputEmail1">Upload your Document</label>
+                    <input type="file" placeholder="Document no." name="IDproff" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <label for="exampleInputEmail1">Shop Lisence/Registration no.</label>
+                    <input type="text" placeholder="Shop Lisence/Registration no." name="shop_reg" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <label for="exampleInputEmail1">Shop Lisence</label>
+                    <input type="file" placeholder="Document no." name="shop_proff" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password"  placeholder="password" name="psw" required class="form-control" id="exampleInputPassword1">
+                        <label for="exampleInputPassword1">Repeat Password</label>
+                        <input type="password"  placeholder="Repeat password" name="psw_repeat" required class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">I agree with your T&C</label>
+                    </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

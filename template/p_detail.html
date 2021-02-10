@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Youneed || Product Details{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+
+{% block slider %}
+
+{% endblock slider %}
+
+{% block details %}
+<br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{product.image.url}}" alt="" class="img-fluid rounded">
+                <div class="row mt-4">
+                    {% for img in product.moreimage_set.all %}
+                    <div class="col-md-4" >
+                        <a href="{{img.image.url}}" target="blank">
+                        <img src="{{img.image.url}}" class="border-danger rounded" width="160" height="140" alt="">
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1> {{product.Product_name|upper}} </h1><hr>
+                <h4> {{product.brand|upper}} </h4>
+                <h4> {{product.Price|upper}} </h4><br>
+                <a href="{% url 'addtocart' product.id %}" id="{{product.id}}" class="btn btn-primary" value="ADD TO CART">ADD TO CART</a><br><hr>
+                <p class="text-info"> {{product.Description|upper}} </p>
+            </div>
+        </div>
+    </div>
+{% endblock details %}

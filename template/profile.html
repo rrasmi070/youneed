@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}User cart{% endblock title %}
+
+{% block cart %}
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-4">
+            <div class="border rounded border-primary px-3">
+                <img src="\media\Hydrangeas.jpg" style="border-radius: 50%; width: 200px; height: 200px;" alt="Avatar" input type='file'><br>
+                <!-- <input class="ml-3" type="file"> -->
+                <br><h2><strong><i>My Profile</i></strong></h2><br>
+                <p><span class="font-weight-bold">NAME :</span> {{ request.user.first_name }} {{ request.user.last_name }} </p>
+                <p><span class="font-weight-bold">E-MAIL :</span> {{ request.user.email }} </p>
+                <p><span class="font-weight-bold">USER ID :</span> {{ request.user.email }}</p>
+                <!-- <p><span class="font-weight-bold"></span></p> -->
+            </div>
+        </div>
+        <div class="col-8">
+            <h2><u>My Orders</u></h2>
+            <div class="container" >
+                <table class="table mt-4">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Sl No.</th>
+                      <th scope="col">Ored ID</th>
+                      <th scope="col"></th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for o in order%}
+                    <tr>
+                      <th>{{forloop.counter}} .</th>
+                      <td>UNEED_0{{o.id}}</td>
+                      <td>{{o.mobile}}</td>
+                      <td>{{o.cresated_at}}</td>
+                      <td>{{o.total}}</td>
+                      <td>{{o.order_status}}</td>
+                    </tr>
+                      {% endfor %}
+                      
+                      
+                  </tbody>
+                </table>
+                
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock cart %}

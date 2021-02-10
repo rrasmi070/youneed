@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Youneed{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+
+{% block card %}<hr>
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    
+
+    <div class="col mx-auto">
+      <div class="row mx-auto">
+        {% for d in response%}    
+        <div class="card mx-auto mb-3" style="width: 18rem;">
+          <a href="{{d.image.url}}"><img class="card-img-top rounded" style=" height: 200px" src="{{d.image.url}}" alt="Card image cap" style="width: 15; height:15;"></a>
+          <div class="card-body">
+            <a href="{% url 'product' d.id %}"><h5 class="card-title">{{d.Product_name}} ({{d.brand}})</h5></a>
+            <p class="card-text">{{d.Description|safe|truncatewords:3 }}<a href="{{ url_for_full_content }}">......</a></p>
+            Price-<h5 class="card-title">{{d.Price}}</h5>
+            <a href="{% url 'addtocart' d.id %}"  class="btn card-bottom btn-primary" value="ADD TO CART">ADD TO CART</a>
+            <!-- <form action="/" method="POST">
+            {% csrf_token %}
+            <input type="text" hidden name="produc" value="{{d.id}}">
+            <input type="submit" id="{{d.id}}" class="btn btn-primary" value="ADD TO CART">
+            </form> -->
+          </div>
+        </div>
+        {%endfor%}
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock card %}
+
+{% block js %}
+  <script>
+    console.log('working');
+    if(localStorage.getItem('cart') == null){
+    var cart = {};
+    }
+    else
+    {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    }
+    $('.cart').click(function(){
+    console.log('clicked');
+    var idstr = this.id.toString();
+    console.log(idstr);
+    if (cart[idstr] !=undefined){
+    cart[idstr] = cart[idstr] + 1;
+    }
+    else
+    {
+    cart[idstr] = 1;
+    }
+    console.log(cart);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    });
+    
+  </script>
+{% endblock js %}

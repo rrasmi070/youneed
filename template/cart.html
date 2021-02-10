@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}User cart{% endblock title %}
+
+{% block css %}
+<body onload="myFunction()">
+</body>
+{% endblock css %}
+
+  {% block cart %}
+    <div class="container" >
+      <table class="table mt-4">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Sl No.</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for cp in cart.cartproduct_set.all%}
+          <tr>
+            <th scope="row">{{forloop.counter}} .</th>
+            <td>{{cp.product}}</td>
+            <td>{{cp.rate}}</td>
+            <td>{{cp.quantity}}</td>
+            <td>{{cp.subtotal}}</td>
+            <div class="row"> 
+              <td>
+                <a class="btn btn-warning" href="{% url 'Managecart' cp.id %}?action=decr">-</a>
+                <a class="btn btn-success" href="{% url 'Managecart' cp.id %}?action=incr">+</a>
+                <a class="btn btn-danger" href="{% url 'Managecart' cp.id %}?action=del">X</a>
+              </td>
+            </div>
+          </tr>
+            {% endfor %}
+            <tr>
+              <th colspan="4"></th>
+              
+              <th>RS. {{cart.total}}</th>
+              {% comment %} <th><a href="{% url 'empty' %}" >Click to CART Empty</a></th> {% endcomment %}
+            </tr>
+            {% if cart.cartproduct_set.all %}
+              <tr>
+                <th>
+                  {% if user.is_authenticated  %}
+                    <a class="btn btn-success mx-2" href="{% url 'ordernow' %}">Order Now</a>
+                  {% else %}
+                    <a class="btn btn-success mx-2" data-toggle="modal" data-target="#exampleModal" href="{% url 'ordernow' %}">Order Now</a>
+                  {% endif %}
+                </th>
+              </tr>
+            {% endif %}
+        </tbody>
+      </table>
+      
+    </div>
+  {% endblock cart %}
+    
+    

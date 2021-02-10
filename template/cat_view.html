@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Youneed{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block slider %}
+    <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-555" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">Filter
+  </a>
+  <div class="dropdown-menu dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-555">
+      {% for c in cate %}
+      
+      <a class="dropdown-item" href="category/?category={{c.id }}">{{c.category_name}}</a>
+      {% comment %} </form> {% endcomment %}
+      {% endfor %}
+      {% comment %}     /?category={{ c.category}}     <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a> {% endcomment %}
+  </div>
+</li>
+    {% endblock slider %}
+
+{% block card %}
+<div class="col-lg-9 mx-auto">
+      <div class="row mx-auto">
+        {% for d in response%}    
+        <div class="card mx-auto mb-3" style="width: 18rem;">
+          <a href="http://127.0.0.1:8000{{d.image}}"><img class="card-img-top" src="http://127.0.0.1:8000{{d.image}}" alt="Card image cap" style="width: 15; height:15;"></a>
+          <div class="card-body">
+            <h5 class="card-title">{{d.Product_name}} ({{d.brand}})</h5>
+            <p class="card-text">{{d.Description|safe|truncatewords:"5"|linebreaks }}<a href="{{ url_for_full_content }}">read more</a></p>
+            Price-<h5 class="card-title">{{d.Price}}</h5>
+            <form action="/" method="POST">
+            {% csrf_token %}
+            <input type="text" hidden name="produc" value="{{d.id}}">
+            <input type="submit" id="{{d.id}}" class="btn btn-primary" value="ADD TO CART">
+            </form>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+{% endblock card %}

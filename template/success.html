@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}User cart{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block cart %}
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Thank You!</h1>
+        <p class="lead"><strong>Your Payment is Successfull</strong>Your Order is placed..!!!</p>
+        <hr>
+        <p>
+          Having trouble? <a href="">Contact us</a>
+        </p>
+        <p class="lead">
+          <a class="btn btn-primary btn-sm" href="{% url 'home_page' %}" role="button">Continue to homepage</a>
+        </p>
+      </div>
+{% endblock cart %}

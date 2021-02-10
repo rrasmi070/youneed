@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Youneed || Product Details{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+
+{% block details %}
+    <div class="container mt-3">
+        <div class="row">
+            <h2><i><u>Search Results for :</u></i> <b class="text-info"> {{request.GET.search}}</b></h2>
+            <div class="container-fluid mt-3">
+                <div class="row">
+                  <div class="col-lg-3">
+                    {% comment %} {% for c in cate %}
+                    <div class="list-group">
+                      <a href="/?category={{ c.category_name}}" class="list-group-item list-group-item-action">{{ c.category_name}}</a>
+                    </div>
+                    {% endfor %} {% endcomment %}
+                  </div>
+                <div class="row">
+                  <div class="col-lg-9 mx-auto">
+                    <div class="row mx-auto">
+                      {% for d in contex%}    
+                      <div class="card mx-auto mb-3" style="width: 18rem;">
+                        <a href="http://127.0.0.1:8000{{d.image}}"><img class="card-img-top rounded" style=" height: 200px" src="http://127.0.0.1:8000{{d.image}}" alt="Card image cap" style="width: 15; height:15;"></a>
+                        <div class="card-body">
+                          <a href="{% url 'product' d.id %}"><h5 class="card-title">{{d.Product_name}} ({{d.brand}})</h5></a>
+                          <p class="card-text">{{d.Description|safe|truncatewords:"50" }}<a href="{{ url_for_full_content }}">......</a></p>
+                          Price-<h5 class="card-title">{{d.Price}}</h5>
+                          <a href="{% url 'addtocart' d.id %}"  class="btn card-bottom btn-primary" value="ADD TO CART">ADD TO CART</a>
+                          <!-- <form action="/" method="POST">
+                          {% csrf_token %}
+                          <input type="text" hidden name="produc" value="{{d.id}}">
+                          <input type="submit" id="{{d.id}}" class="btn btn-primary" value="ADD TO CART">
+                          </form> -->
+                        </div>
+                      </div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+        </div> 
+    </div>
+{% endblock details %}

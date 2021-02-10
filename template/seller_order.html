@@ -1,0 +1,43 @@
+{% extends 'seller_base.html' %}
+
+{% block title %}Youneed || Product Entry{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+        
+        <h3></h3><strong>Pending Orders</strong></h3><br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Sl No.</th>
+                        <th>Customer</th>
+                        <th>Order ID</th>
+                        <th>Ordered On</th>
+                        <th>Amount</th>
+                        <th>Payment ID</th>
+                        <th>Payment Status</th>
+                        <th>Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ord in pendingOrders %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="">{{ ord.order_by }}</a></td>
+                        <td><a href="{% url 'admin-oder' ord.id %}">#Youneed_{{ ord.id }}</a></td>
+                        <td>{{ ord.cresated_at }}</td>
+                        <td>{{ ord.total }}</td>
+                        <td>{{ ord.razorpay_payment_id }}</td>
+                        <td>{{ ord.payment_status }}</td>
+                        <td>{{ ord.payment_method }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock body %}

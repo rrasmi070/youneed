@@ -1,0 +1,102 @@
+{% extends "seller_base.html" %}
+{% load static %}
+
+
+{% block title %}Seller Product Enrty{% endblock %}
+{% comment %} {% if user.is_authenticated %} {% endcomment %}
+{% block content %}
+
+    <div class="container mt-3">
+    <form action="{% url 'product' %}" method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+         <input type="text" name="user" value={{request.user}} >
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Choose your product type</label>
+                <select class="form-control" id="exampleFormControlSelect1" name="type" required>
+                    <option></option>
+                    <option>Electronics</option>
+                    <option>Fashion</option>
+                    <option>Study material</option>
+                    <option>Food</option>
+                    <option>Bag</option>
+                    <option>Gifts</option>
+                </select>
+            </div>
+        <br>
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Product image</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="img1" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Product Image(2)</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="img2" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="validationTextarea">Tagging</label>
+                <textarea class="form-control is-" id="validationTextarea" placeholder="Taging...." name="tag" required></textarea>
+            <div class="invalid-feedback">
+                Please enter a message in the textarea.
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control is-" name="p_name" placeholder="product name" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control is-" name="p_brand" placeholder="Brand"required>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control is-" name="p_price" placeholder="Price">
+                </div>
+                <!-- <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">On offer...</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                        <input type="number" class="form-control is-" name="p_brand" placeholder="Offer in %...(Ex: 20% )">
+                        </div>
+                    </div>
+                    
+                </div> -->
+            </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control is-" name="offer_price" placeholder="Offer Price" required>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control is-" name="p_Description" placeholder="Description" required>
+            </div>
+        </div>
+            <!-- <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control is-" name="p_price" placeholder="Price" required>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control is-" name="p_Description" placeholder="Description" required>
+                </div>
+            </div> -->
+
+        <button type="Submit" class="btn btn-outline-success">Submit</button>
+    </form>
+
+    </div>
+
+    
+{% endblock content %}
