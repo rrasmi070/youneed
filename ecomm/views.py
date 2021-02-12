@@ -53,11 +53,11 @@ def home(request):
     
     # count=0
     # f=0
-    # catego_id=request.GET.get("category")
-    # print(catego_id)
-    # if catego_id:
-    #     prdt=Product.objects.filter(category_id=catego_id)
-    #     # print(a)
+    catego_id=request.GET.get("category")
+    print(catego_id)
+    if catego_id:
+        prdt=Product.objects.filter(category_id=catego_id)
+        
     
     # # print(v)
     # for d in response:
@@ -112,7 +112,7 @@ def filter(request):
     print(catego_id)
     if catego_id:
         prdt=Product.objects.filter(category_id=catego_id).order_by("Price")
-    
+        print(prdt)
     params = {'response':prdt,'cate':cate}
     return render(request, 'cat_view.html', params)
     # render(request, 'cat_view.html')
@@ -429,6 +429,8 @@ class Dashboaer(TemplateView):
     template_name = "seller_order.html"
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
+        a=Order.objects.filter(order_status="Order received")
+        print(a)
         context['pendingOrders'] = Order.objects.filter(order_status="Order received")
         return context
 

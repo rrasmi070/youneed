@@ -26,8 +26,8 @@
                     {% for ord in pendingOrders %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td><a href="">{{ ord.order_by }}</a></td>
-                        <td><a href="{% url 'admin-oder' ord.id %}">#Youneed_{{ ord.id }}</a></td>
+                        <td><a href="{% url 'admin_oder' ord.id %}">{{ ord.order_by }}</a></td>
+                        <td><a href="">#Youneed_{{ ord.id }}</a></td>
                         <td>{{ ord.cresated_at }}</td>
                         <td>{{ ord.total }}</td>
                         <td>{{ ord.razorpay_payment_id }}</td>

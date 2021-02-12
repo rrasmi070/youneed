@@ -1,0 +1,8 @@
+For client or side.............................
+https://rasmiranjans327.pythonanywhere.com
+
+
+
+
+For Seller Side Link
+https://rasmiranjans327.pythonanywhere.com/seller/

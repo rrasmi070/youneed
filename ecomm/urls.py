@@ -29,7 +29,7 @@ urlpatterns = [
     path('sell_signup/', views.sell_signup, name= 'sell_signup'),
     path('seller_login/', views.Seller_Login, name= 'seller_login'),
     path('dashbord/', Dashboaer.as_view(), name= 'dashbord'),
-    path('admin-oder/<int:pk>/', OreddetailView.as_view(), name= 'admin_oder'),
+    path('admin_oder/<int:pk>/', OreddetailView.as_view(), name= 'admin_oder'),
     path('admin-oder-statu-<int:pk>-change/', OrderStausView.as_view(), name= 'admin-oder-statu'),
 
     path('oauth/', include('social_django.urls', namespace='facebook')),
